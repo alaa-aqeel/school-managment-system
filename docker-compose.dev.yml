@@ -1,7 +1,8 @@
 services:
-  development:
+  testing:
+    container_name: app_development
     build:
-      dockerfile: Dockerfile
+      dockerfile: ./docker/Dockerfile.dev
       context: .
     volumes:
       - ./:/app

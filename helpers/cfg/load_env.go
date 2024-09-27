@@ -2,18 +2,29 @@ package cfg
 
 import (
 	"fmt"
-	"log"
+	"path/filepath"
 
+	"github.com/alaa-aqeel/school-managment-system/helpers"
 	"github.com/joho/godotenv"
 )
 
-func loadEnv(file string) {
-	errr := godotenv.Load(file)
-	if errr != nil {
-		log.Fatal(fmt.Errorf("[Error]: file %s does not exist", file))
+func loadEnv(filename string) error {
+	baseDir := helpers.GetBaseDir(".")
+	file := filepath.Join(baseDir, filename)
+	err := godotenv.Load(filepath.Join(baseDir, filename))
+	if err != nil {
+		return fmt.Errorf("[Error]: file %s does not exist", file)
 	}
+
+	return nil
 }
 
-func InitConfig() {
-	loadEnv(".env")
+func InitConfig() error {
+	val := setting.GetEnv("ENV_FILE")
+	err := loadEnv(val)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
