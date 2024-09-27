@@ -14,6 +14,7 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 COPY .env /app
+COPY .air.toml /app
 COPY . .
 
 EXPOSE 8080
