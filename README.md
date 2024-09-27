@@ -3,23 +3,25 @@ School Managment System
 
 ### Project Structure
 ```plaintext
-/api 
- |-- /handlers
- |-- /midllewares 
- |-- /routes
-/interna
- |-- /entities
+/app
+ |-- /models
  |-- /services
- |-- /database 
  |-- /interfaces
-    |-- repositories
-/pkg
- |-- /utils
+/cmd
+ |-- main.go
+/config
+ |-- app.go
+/database
+ |-- database.go
+/helpers
+/http 
+ |-- /handlers
+ |-- /midllewares
+/route
+ |-- api.g
+/scripts
+ |-- server.sh
 /test
  |-- /unit
  |-- /integration
-/scripts
- |-- migrate.sh
- |-- server.sh
- |-- test.sh
 ```
