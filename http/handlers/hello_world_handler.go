@@ -12,6 +12,11 @@ func HelloWorldHandler(w http.ResponseWriter, r *http.Request) {
 
 	userService := user_service.New()
 	userService.CreateUser(user.User{
+		Username: "admin 2",
+		Password: "admin 2",
+		IsActive: true,
+	})
+	userService.CreateUser(user.User{
 		Username: "admin",
 		Password: "admin",
 		IsActive: true,

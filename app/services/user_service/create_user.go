@@ -1,23 +1,26 @@
 package user_service
 
 import (
-	"time"
-
 	"github.com/alaa-aqeel/school-managment-system/app/models/user"
-	"github.com/alaa-aqeel/school-managment-system/helpers"
+	"github.com/alaa-aqeel/school-managment-system/app/observers"
 	"github.com/alaa-aqeel/school-managment-system/helpers/hash"
 )
 
-func (s *UserService) CreateUser(user user.User) error {
-	user.ID = helpers.UUID()
-	hash, err := hash.Make(user.Password)
+func (s *UserService) CreateUser(_user user.User) error {
+	hash, err := hash.Make(_user.Password)
 	if err != nil {
 		return err
 	}
-	user.Password = hash
-	user.CreatedAt = time.Now()
-	user.UpdatedAt = time.Now()
-	s.users[user.ID] = user
+	_user.Password = hash
+	observers.ExceuteObservers(s.observers, "Creating", &_user)
+	s.users[_user.ID] = _user
+
+	return nil
+}
+
+func (s *UserService) UpdateUser(_user user.User) error {
+	observers.ExceuteObservers(s.observers, "Update", &_user)
+	s.users[_user.ID] = _user
 
 	return nil
 }

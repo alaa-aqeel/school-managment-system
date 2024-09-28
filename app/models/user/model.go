@@ -14,3 +14,15 @@ type User struct {
 	DeleatedAt  time.Time
 	LastLoginAt time.Time
 }
+
+func (u *User) SetCreatedAt(t time.Time) {
+	u.CreatedAt = t
+}
+
+func (u *User) SetUpdatedAt(t time.Time) {
+	u.UpdatedAt = t
+}
+
+func (u *User) SetId(id string) {
+	u.ID = id
+}
