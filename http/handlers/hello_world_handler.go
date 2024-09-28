@@ -3,11 +3,18 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/alaa-aqeel/school-managment-system/config"
+	"github.com/alaa-aqeel/school-managment-system/app/models/user"
+	"github.com/alaa-aqeel/school-managment-system/app/services/user_service"
+	"github.com/alaa-aqeel/school-managment-system/helpers/response"
 )
 
 func HelloWorldHandler(w http.ResponseWriter, r *http.Request) {
 
-	w.Write([]byte("Hello world ^"))
-	w.Write([]byte(config.Database.GetEnv("DB_HOST")))
+	userService := user_service.New()
+	userService.CreateUser(user.User{
+		Username: "admin",
+		Password: "admin",
+		IsActive: true,
+	})
+	response.Response(w).Json(userService.GetAll())
 }
