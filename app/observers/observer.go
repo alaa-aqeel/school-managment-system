@@ -4,14 +4,11 @@ import (
 	"errors"
 	"fmt"
 	"reflect"
+
+	"github.com/alaa-aqeel/school-managment-system/app/interfaces"
 )
 
-type Observer[T any] interface {
-	Creating(model T)
-	Updating(model T)
-}
-
-func ExcuteMethod[T any](observer Observer[T], name string, model T) error {
+func ExcuteMethod[T any](observer interfaces.Observer[T], name string, model T) error {
 	observerValue := reflect.ValueOf(observer)
 	method := observerValue.MethodByName(name)
 	if !method.IsValid() {
@@ -30,7 +27,7 @@ func ExcuteMethod[T any](observer Observer[T], name string, model T) error {
 	return nil
 }
 
-func ExceuteObservers[T any](observers []Observer[T], name string, model T) error {
+func ExceuteObservers[T any](observers []interfaces.Observer[T], name string, model T) error {
 	for _, observer := range observers {
 		if err := ExcuteMethod(observer, name, model); err != nil {
 			fmt.Println(err)
