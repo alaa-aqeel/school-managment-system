@@ -1,13 +1,13 @@
 package user_service
 
 import (
-	"github.com/alaa-aqeel/school-managment-system/app/interfaces"
-	"github.com/alaa-aqeel/school-managment-system/app/models/user"
+	"github.com/alaa-aqeel/school-managment-system/app/domain"
+	"github.com/alaa-aqeel/school-managment-system/app/interfaces/observer"
 )
 
-type MapUsers map[string]user.User
+type MapUsers map[string]domain.User
 
 type UserService struct {
 	users     MapUsers
-	observers []interfaces.Observer[*user.User]
+	observers []observer.Observer[*domain.User]
 }

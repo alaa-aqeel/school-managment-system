@@ -1,4 +1,4 @@
-package interfaces
+package observer
 
 type Observer[T any] interface {
 	Creating(model T)

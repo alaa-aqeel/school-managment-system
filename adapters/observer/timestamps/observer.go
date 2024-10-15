@@ -1,12 +1,6 @@
-package observers
+package timestamps
 
-import (
-	"time"
-
-	"github.com/alaa-aqeel/school-managment-system/app/interfaces"
-)
-
-type TimestampsObserver[T interfaces.TimestampsInterface] struct{}
+import "time"
 
 func (s *TimestampsObserver[T]) Creating(model T) {
 

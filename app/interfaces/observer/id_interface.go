@@ -1,4 +1,4 @@
-package interfaces
+package observer
 
 type SetIdInterface interface {
 	SetId(id string)

@@ -1,14 +1,14 @@
-package observers
+package utils
 
 import (
 	"errors"
 	"fmt"
 	"reflect"
 
-	"github.com/alaa-aqeel/school-managment-system/app/interfaces"
+	"github.com/alaa-aqeel/school-managment-system/app/interfaces/observer"
 )
 
-func ExcuteMethod[T any](observer interfaces.Observer[T], name string, model T) error {
+func ExcuteMethod[T any](observer observer.Observer[T], name string, model T) error {
 	observerValue := reflect.ValueOf(observer)
 	method := observerValue.MethodByName(name)
 	if !method.IsValid() {
@@ -27,7 +27,7 @@ func ExcuteMethod[T any](observer interfaces.Observer[T], name string, model T) 
 	return nil
 }
 
-func ExceuteObservers[T any](observers []interfaces.Observer[T], name string, model T) error {
+func ExceuteObservers[T any](observers []observer.Observer[T], name string, model T) error {
 	for _, observer := range observers {
 		if err := ExcuteMethod(observer, name, model); err != nil {
 			fmt.Println(err)
